@@ -1,0 +1,16 @@
+{
+    "name": "flexnav",
+    "version": "1.0.0",
+    "description": "test nav for bills site",
+    "main": "index.js",
+    "scripts": {
+        "devserver": "live-server",
+        "scss": "node-sass -w sass/main.scss css/style.css"
+    },
+    "author": "df",
+    "license": "ISC",
+    "devDependencies": {
+        "live-server": "^1.2.1",
+        "node-sass": "^5.0.0"
+    }
+}
