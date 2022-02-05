@@ -81,13 +81,21 @@ a {
     order: 3;
     width: 100%;
     text-align: center;
-    display: none;
-}
-
-.active .item {
     display: block;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -ms-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
 }
 
+// .active .item {
+//     display: block;
+// }
 .button.secondary {
     border-bottom: 1px #444 solid;
 }
@@ -101,6 +109,7 @@ a {
 
 .submenu-active .submenu {
     display: block;
+    //opacity: 0;
 }
 
 .has-submenu>a::after {
@@ -122,12 +131,10 @@ a {
     border-radius: 3px;
 }
 
+.hidden {
+    display: none;
+}
 
-/* animation css */
-
-// .hidden .items {
-//     display: none;
-// }
-// .visuallyhidden .items {
-//     opacity: 0;
-// }
+.visuallyhidden {
+    opacity: 0;
+}
