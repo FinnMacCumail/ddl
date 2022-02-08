@@ -31,36 +31,27 @@ toggle.addEventListener('click', toggleMenu, false);
 // Submenus
 const items = document.querySelectorAll('.item');
 
-// function toggleSubMenuItem() {
-//     if (this.classList.contains("hidden")) {
-//         this.classList.remove("hidden");
-//         setTimeout(function() {
-//             this.classList.remove('visuallyhidden');
-//         }, 20);
-//     } else {
-//         this.classList.add("visuallyhidden");
-//         this.addEventListener('transitionend', function(e) {
-//             this.classList.add('hidden');
-//         }, {
-//             capture: false,
-//             once: true,
-//             passive: false
-//         });
-//     }
-// }
-
 function toggleSubMenuItem() {
     if (this.classList.contains("submenu-active")) {
+        const retElems = this.getElementsByClassName("subitem");
+        [...retElems].forEach(function(item) {
+            item.classList.add('visuallyhidden');
+            item.addEventListener('transitionend', function(e) {
+                item.classList.add('hidden');
+            }, {
+                capture: false,
+                once: true,
+                passive: false
+            });
+        });
 
-        
-        
         this.classList.remove("submenu-active");
     } else if (menu.querySelector(".submenu-active")) {
         menu.querySelector(".submenu-active").classList.remove("submenu-active");
         this.classList.add("submenu-active");
     } else {
-
-        submenuitems.forEach(function(item) {
+        const retElems = this.getElementsByClassName("subitem");
+        [...retElems].forEach(function(item) {
             if (item.classList.contains('hidden')) {
                 item.classList.remove("hidden");
                 //toggle.querySelector("a").innerHTML = "<i class='fas fa-times'></i>";
