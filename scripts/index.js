@@ -2,7 +2,7 @@ const toggle = document.querySelector('.toggle');
 const listNodes = document.querySelectorAll('.item');
 const menu = document.querySelector(".menu");
 
-//const submenu = document.querySelectorAll('.submenu');
+const submenuitems = document.querySelectorAll('.subitem');
 
 function toggleMenu() {
     listNodes.forEach(function(item) {
@@ -51,11 +51,25 @@ const items = document.querySelectorAll('.item');
 
 function toggleSubMenuItem() {
     if (this.classList.contains("submenu-active")) {
+
+        
+        
         this.classList.remove("submenu-active");
     } else if (menu.querySelector(".submenu-active")) {
         menu.querySelector(".submenu-active").classList.remove("submenu-active");
         this.classList.add("submenu-active");
     } else {
+
+        submenuitems.forEach(function(item) {
+            if (item.classList.contains('hidden')) {
+                item.classList.remove("hidden");
+                //toggle.querySelector("a").innerHTML = "<i class='fas fa-times'></i>";
+                setTimeout(function() {
+                    item.classList.remove('visuallyhidden');
+                }, 20);
+            }
+        })
+
         this.classList.add("submenu-active");
     }
 }
