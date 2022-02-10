@@ -1,11 +1,12 @@
 const toggle = document.querySelector('.toggle');
-const listNodes = document.querySelectorAll('.item');
 const menu = document.querySelector(".menu");
-
+// Get all menu li items
+const items = document.querySelectorAll('.item');
+// Get all menu submenu li items
 const submenuitems = document.querySelectorAll('.subitem');
 
 function toggleMenu() {
-    listNodes.forEach(function(item) {
+    items.forEach(function(item) {
         if (item.classList.contains('hidden')) {
             item.classList.remove("hidden");
             toggle.querySelector("a").innerHTML = "<i class='fas fa-times'></i>";
@@ -28,54 +29,37 @@ function toggleMenu() {
 
 toggle.addEventListener('click', toggleMenu, false);
 
-// Submenus
-const items = document.querySelectorAll('.item');
-
 function toggleSubMenuItem() {
+    // click out/off from submenu - if submenu is already active remove submenu parent class and each sub menu list item class
     if (this.classList.contains("submenu-active")) {
+        this.classList.remove("submenu-active");
         const retElems = this.getElementsByClassName("subitem");
         [...retElems].forEach(function(item) {
-            item.classList.add('visuallyhidden');
-            item.addEventListener('transitionend', function(e) {
-                item.classList.add('hidden');
-            }, {
-                capture: false,
-                once: true,
-                passive: false
-            });
-        });
+            item.classList.remove('subdisplay');
 
-        this.classList.remove("submenu-active");
+        });
+        // else check if submenu is already active anywhere else within the menu and remove both submenu parent class and each sub menu list item class
+        // before adding submenu parent class and each sub menu list item class for the chosen/clicked submenu
     } else if (menu.querySelector(".submenu-active")) {
         menu.querySelector(".submenu-active").classList.remove("submenu-active");
+        [...submenuitems].forEach(function(item) {
+            item.classList.remove("subdisplay");
+        });
         this.classList.add("submenu-active");
+        const retElems = this.getElementsByClassName("subitem");
+        [...retElems].forEach(function(item) {
+                item.classList.add("subdisplay");
+            })
+            // default state when a submenu is first clicked after initial page load
     } else {
         const retElems = this.getElementsByClassName("subitem");
         [...retElems].forEach(function(item) {
-            if (item.classList.contains('hidden')) {
-                item.classList.remove("hidden");
-                //toggle.querySelector("a").innerHTML = "<i class='fas fa-times'></i>";
-                setTimeout(function() {
-                    item.classList.remove('visuallyhidden');
-                }, 20);
-            }
+            item.classList.add("subdisplay");
         })
-
         this.classList.add("submenu-active");
     }
 }
-
-// function toggleItem() {
-//     if (this.classList.contains("submenu-active")) {
-//         this.classList.remove("submenu-active");
-//     } else if (menu.querySelector(".submenu-active")) {
-//         menu.querySelector(".submenu-active").classList.remove("submenu-active");
-//         this.classList.add("submenu-active");
-//     } else {
-//         this.classList.add("submenu-active");
-//     }
-// }
-
+// iterate through li items and attach toggleSubMenu function to clcik and keypress events
 for (let item of items) {
     if (item.querySelector('.submenu')) {
         item.addEventListener('click', toggleSubMenuItem, false);
